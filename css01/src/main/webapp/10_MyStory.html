@@ -1,0 +1,231 @@
+<!doctype html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link 
+    	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" 
+    	rel="stylesheet" 
+   		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" 
+    	crossorigin="anonymous">
+   	<style>
+   		.image01 {
+   			height: 400px;
+   		}
+   		.card-text {
+   		font-size: 23px;
+   		}
+   		.card-title {
+   		font-size: 35px;
+   		}
+   		   	
+   	</style>
+  </head>
+  <body>
+  
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-4">JM's story</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">인스타 놀러와요 -></a></li>
+        <li class="nav-item"><a href="https://www.instagram.com/jaeman_yun" class="nav-link"><img alt="인스타" src="images2/instagram.svg" /></a></li>
+      </ul>
+    </header>
+  </div>
+  
+  <div class="container px-4 py-5" id="custom-cards">
+    <h2 class="pb-2 border-bottom">간략한 자기소개!</h2>
+
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+      <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('images2/1234.jpg'); background-size: 100% 100%;">
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
+            1990.11.11
+            <br/>
+            <br/>
+            전갈자리!
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('images2/2345.jpg'); background-size: 100% 100%;">
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1" >
+            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold" >
+            여행러버
+            <br/>
+            코로나이놈!
+            <br/>
+            ㅠㅠ
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('images2/4567.jpg'); background-size: 100% 100%;">
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
+            댕댕러버
+            <br/>
+            <br/>
+            댕청집사!
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="container px-4 py-5" id="hanging-icons">
+    <h2 class="pb-2 border-bottom">내가 누구냐면?!</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      <div class="col d-flex align-items-start">
+        <div>
+          <h3 class="fs-2">서울에서 태어났어!</h3>
+          <p>서울 강동구 성내동에서 태어나서 33년째 서울에서 살고있는 서울촌놈입니다. 
+          서울에서 그렇게 오래 살았는데 아직도 서울을 잘 몰라요 ㅎㅎ 항상 지방으로 놀러다녔거든요...!</p>
+          <a href="#" class="btn btn-primary">
+            Primary button
+          </a>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <div>
+          <h3 class="fs-2">1남 1녀중 막내야!</h3>
+          <p>안 궁금하겠지만, 위로 6살 터울의 누나가 있어요!!!
+          지금은 내가 독립해서 혼자 살지만, 그전까지는 부모님과 누나와 다같이 살았었어요!!
+          혹시 소개받으실분 계시려나요?!</p>
+          <a href="#" class="btn btn-primary">
+            Primary button
+          </a>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <div>
+          <h3 class="fs-2">운명적인.. 댕댕집사?!</h3>
+          <p>사실 댕댕이를 그렇게 막 키우고 싶거나 하지는 않지만...
+          왠지 모르게 댕댕이들이 나를 좋아해서... 혹은 우연히 친해진 지인들이 전부 댕댕이를 키워서
+          '이제는 댕댕이한테 벗어날 수 없는 삶을 살고 있구나...'하면서 살고 있어요ㅎㅎ</p>
+          <a href="#" class="btn btn-primary">
+            Primary button
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+	<div class="card mb-3" style="max-width: 100%;">
+		<div class="row g-0">
+	    	<div class="col-md-4">
+	      		<img src="images2/1111.jpg" class="image01" alt="별쫑이">
+	    	</div>
+	    	<div class="col-md-8">
+	      		<div class="card-body">
+	        		<h3 class="card-title">저는 별이/쫑이가 있습니다!</h3>
+	       			<p class="card-text">
+	       			<br/>
+			        저희 집에는 13살된 강아지 별이와 12살된 별이의 딸 쫑이가 살고 있습니다.
+			        막 20살이 되던 해 누나가 입양해서 대려온 별이는 제가 성인이 된지 얼마 안되서부터
+			        쭈욱~ 같이 해온 댕댕이죠 ㅎㅎ
+			        쬐깐한 주제에 용맹하기 그지 없어서 누구든 보면 달려드는데..(라고 쓰고 사회화가 안됐다고 말합니다.)
+			        가족들에게는 한없이 귀욤귀욤한 댕댕이입니다 ㅎㅎ
+			        </p>
+	      		</div>
+	    	</div>
+		</div>
+	</div>
+    
+    <div class="card mb-3" style="max-width: 100%;">
+		<div class="row g-0">
+	    	<div class="col-md-8">
+	      		<div class="card-body">
+	        		<h3 class="card-title">저는 운동을 좋아합니다!</h3>
+	       			<p class="card-text">
+	       			<br/>
+			        작년에 일하다가 허리 디스크가 터져서 병원신세를 지기 전까지
+			        평생 운동이랑 함께한 절친입니다 ㅎㅎ
+			        성인이 되고나서 자전거를 타기 시작하면서 한때는 자전거에 미쳐 살았던적도 있었네요 ㅎㅎ
+			        비록 지금은 허리 회복을 위해서 자전거를 처분했지만,
+			        추후에 완전히 회복하면 다시 한번 타볼 생각입니다.
+			        자전거 이외에도 복싱, 클라이밍, 마라톤, 웨이트트레이닝, 야구, 축구 등등등...
+			        을 했었어요! ㅎㅎㅎ
+			        </p>
+	      		</div>
+	    	</div>
+	    	<div class="col-md-4">
+	      		<img src="images2/2222.jpg" class="image01" alt="자전거">
+	    	</div>
+		</div>
+	</div>
+    
+    <div class="card mb-3" style="max-width: 100%;">
+		<div class="row g-0">
+			<div class="col-md-4">
+	      		<img src="images2/3333.jpg" class="image01" alt="케이터링">
+	    	</div>
+	    	<div class="col-md-8">
+	      		<div class="card-body">
+	        		<h3 class="card-title">저는 과거에 이런일을 했었습니다.</h3>
+	       			<p class="card-text">
+	       			<br/>
+			        천문학과를 나와서, 전공을 살리지 못하는 까닭에 이일저일 정말 많은 일을 해봤습니다!
+			        해본 알바 종류만 20종류가 넘어요! ㅎㅎㅎ
+			        그중에 가장 오래 일했던 것중 하나가 케이터링 일이었습니다.
+			        일하면서 유명인들도 많이 만나고 재미있게 했던 일이었는데...
+			        누가 코로나가 터질 줄 알았을까요? ㅎㅎㅎ
+			        </p>
+	      		</div>
+	    	</div>
+		</div>
+	</div>
+	
+	
+	<div class="card mb-3" style="max-width: 100%;">
+		<div class="row g-0">
+	    	<div class="col-md-8">
+	      		<div class="card-body">
+	        		<h3 class="card-title">지금은 코딩을 배우고 있습니다!</h3>
+	       			<p class="card-text">
+	       			<br/>
+			        제 삶은 작년 9월에서 큰 변화가 있었습니다. 직장에서 일을하다가 디스크가 파열되버렸어요.
+			        처음엔 몰랐는데, 나중엔 제대로 걷지도 못할 정도로 악화되었습니다. 대학병원에서도 수술해야 할것 같다는 소견이 나와서
+			        올해 3월에 디스크 제거술을 받았습니다. 지금은 완쾌했다고 믿고 있습니다.
+			        그래서 새로운 길을 찾아 나서기 시작했어요.
+			        주변 개발자 친구들의 조언을 조금씩 받아나가면서 코드공부를 하고 있습니다.
+			        그래도 막막할정도로 어렵거나 하지 않아서 다행인거 같아요.
+			        저 잘 할수 있겠죠?
+			        </p>
+	      		</div>
+	    	</div>
+	    	<div class="col-md-4">
+	      		<img src="images2/6789.JPG" class="image01" alt="코딩">
+	    	</div>
+		</div>
+	</div>
+    
+    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+      <p align="center"> JM이 만든 첫 웹 페이지입니다..!!!!! 너무 어렵네요..!! ㅎㅎ</p>
+    </div>
+    
+    
+    <script 
+    	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" 
+    	integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" 
+    	crossorigin="anonymous"></script>
+  </body>
+  
+  
+</html>
