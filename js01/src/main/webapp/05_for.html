@@ -31,6 +31,21 @@
 	result.innerHTML += text;
 	result.innerHTML += '<hr/>';
 	
+	// 구구단을 2단은 2x2 까지, 3단은 3x3... 9단은 9x9까지 출력.
+	
+	text='';
+	for (let i = 2; i < 10; i++) {
+		text += `----- ${i}단 ----- <br/>`;	
+		for (let n = 1; n < 10; n++) {
+			text += `${i} x ${n} = ${i * n} <br/>`;
+			if (n == i){
+				break;
+			}
+		}
+	}
+	result.innerHTML += text;
+	result.innerHTML += '<hr/>';
+	
 	</script>
 
 </body>
