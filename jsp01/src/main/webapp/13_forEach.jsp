@@ -66,6 +66,8 @@
 		</tbody>
 	</table>
 	
+	<hr/>
+	
 	<table>
 		<thead>
 			<tr>
