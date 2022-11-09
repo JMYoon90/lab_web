@@ -18,8 +18,8 @@
 					<a href="${ mainPage }">메인 페이지</a>
 				</li>
 				<li>
-					<c:url var="postlist" value="/post/list"></c:url>
-					<a href="/jsp02/post">목록 페이지</a>
+					<c:url var="postList" value="/post/list"></c:url>
+					<a href=" ${ postList }">목록 페이지</a>
 				</li>
 			</ul>
 		</nav>

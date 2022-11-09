@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +17,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import edu.web.jsp02.datasource.HikariDataSourceUtil;
 import edu.web.jsp02.domain.Post;
+import edu.web.jsp02.dto.PostUpdateDto;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,6 +44,22 @@ public class PostDaoImpl implements PostDao {
 		return instance;
 	}
 	
+	private Post recordToEntity(ResultSet rs) throws SQLException {
+		Integer id = rs.getInt("ID");
+		String title = rs.getString("TITLE");
+		String content = rs.getString("CONTENT");
+		String author = rs.getString("AUTHOR");
+		LocalDateTime createdTime = rs.getTimestamp("CREATED_TIME").toLocalDateTime();
+		LocalDateTime modifiedTime = rs.getTimestamp("MODIFIED_TIME").toLocalDateTime();
+		
+		Post entity = Post.builder()
+				.id(id).title(title).content(content).author(author)
+				.createdTime(createdTime).modifiedTime(modifiedTime)
+				.build();
+		
+		return entity;
+	}
+	
 	public static final String SQL_SELECT = "select * from POSTS order by ID desc";
 
 	@Override
@@ -59,17 +78,7 @@ public class PostDaoImpl implements PostDao {
 			rs = stmt.executeQuery();
 			
 			while ( rs.next()) { // select 결과에서 row 데이터가 있으면
-				Integer id = rs.getInt("id");
-				String title = rs.getString("TITLE");
-				String content = rs.getString("CONTENT");
-				String author = rs.getString("AUTHOR");
-				LocalDateTime createdTime = rs.getTimestamp("CREATED_TIME").toLocalDateTime();
-				LocalDateTime modifiedTime = rs.getTimestamp("MODIFIED_TIME").toLocalDateTime();
-				
-				Post post = Post.builder()
-						.id(id).title(title).content(content).author(author)
-						.createdTime(createdTime).modifiedTime(modifiedTime)
-						.build();
+				Post post = recordToEntity(rs);
 				list.add(post);
 			}
 		} catch (SQLException e) {
@@ -147,16 +156,7 @@ public class PostDaoImpl implements PostDao {
 			ResultSet rs = stmt.executeQuery();
 			
 			if(rs.next()) { // 검색된 행(row, 레코드)가 있으면
-				String title = rs.getString("TITLE");
-				String content = rs.getString("CONTENT");
-				String author = rs.getString("AUTHOR");
-				LocalDateTime createdTime = rs.getTimestamp("CREATED_TIME").toLocalDateTime();
-				LocalDateTime modifiedTime = rs.getTimestamp("MODIFIED_TIME").toLocalDateTime();
-				
-				entity = Post.builder()
-						.id(id).title(title).content(content).author(author)
-						.createdTime(createdTime).modifiedTime(modifiedTime)
-						.build();
+				entity = recordToEntity(rs);
 			}
 			
 			
@@ -198,7 +198,7 @@ public class PostDaoImpl implements PostDao {
 			"update POSTS set TITLE = ?, CONTENT = ?, MODIFIED_TIME = sysdate where ID = ?";
 
 	@Override
-	public int update(Integer id, String title, String content) {
+	public int update(Post entity) {
 		int result = 0;
 		
 		try {
@@ -208,9 +208,9 @@ public class PostDaoImpl implements PostDao {
 			@Cleanup
 			PreparedStatement stmt = conn.prepareStatement(SQL_UPDATE);
 			
-			stmt.setString(1, title);
-			stmt.setString(2, content);
-			stmt.setInt(3, id);
+			stmt.setString(1, entity.getTitle());
+			stmt.setString(2, entity.getContent());
+			stmt.setInt(3, entity.getId());
 			
 			result = stmt.executeUpdate();
 			
@@ -218,6 +218,69 @@ public class PostDaoImpl implements PostDao {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public static final String SELECT_BY_TITLE = 
+			"select * from POSTS where lower(TITLE) like ? order by ID desc";
+	public static final String SELECT_BY_CONTENT = 
+			"select * from POSTS where lower(CONTENT) like ? order by ID desc";
+	public static final String SELECT_BY_TITLE_OR_CONTENT = 
+			"select * from POSTS "
+			+ "where lower(TITLE) like ? or lower(CONTENT) like ? "
+			+ "order by ID desc";
+	public static final String SELECT_BY_AUTHOR = 
+			"select * from POSTS where lower(AUTHOR) like ? order by ID desc";
+	
+	
+	@Override
+	public List<Post> selectByKeyword(String type, String keyword) {
+		log.info("selectByKeyword(type= {}, keyword = {})", type, keyword);
+		
+		List<Post> list = new ArrayList<>();
+		
+		try {
+			@Cleanup
+			Connection conn = ds.getConnection();
+			
+			@Cleanup
+			PreparedStatement stmt = null;
+			
+			// TODO: 검색 SQL 선택 -> SQL 실행 -> 결과 분석 -> List 생성
+			String sql = "";
+			switch (type) {
+			case "t": // 제목 검색
+				stmt = conn.prepareStatement(SELECT_BY_TITLE);
+				stmt.setString(1, "%" + keyword.toLowerCase() + "%");
+				break;
+			case "c": // 내용 검색
+				stmt = conn.prepareStatement(SELECT_BY_CONTENT);
+				stmt.setString(1, "%" + keyword.toLowerCase() + "%");
+				break;
+			case "tc": // 제목 또는 내용 검색
+                stmt = conn.prepareStatement(SELECT_BY_TITLE_OR_CONTENT);
+                stmt.setString(1, "%" + keyword.toLowerCase() + "%");
+                stmt.setString(2, "%" + keyword.toLowerCase() + "%");
+                break;
+			case "a": // 작성자 검색
+				stmt = conn.prepareStatement(SELECT_BY_AUTHOR);
+				stmt.setString(1, "%" + keyword.toLowerCase() + "%");
+				break;
+			}
+			
+			@Cleanup
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Post entity = recordToEntity(rs);
+				list.add(entity);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return list;
 	}
 
 }

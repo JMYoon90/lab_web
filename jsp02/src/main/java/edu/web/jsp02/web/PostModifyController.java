@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.web.jsp02.domain.Post;
+import edu.web.jsp02.dto.PostUpdateDto;
 import edu.web.jsp02.service.PostService;
 import edu.web.jsp02.service.PostServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -62,7 +63,11 @@ public class PostModifyController extends HttpServlet {
     	String title = request.getParameter("title");
     	String content = request.getParameter("content");
     	
-    	int result = postService.update(id, title, content);
+    	PostUpdateDto dto = PostUpdateDto.builder()
+    			.id(id).title(title).content(content)
+    			.build();
+    	
+    	int result = postService.update(dto);
     	
     	response.sendRedirect("/jsp02/post");
     	

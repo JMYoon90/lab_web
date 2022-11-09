@@ -10,7 +10,15 @@
 <body>
 
 	<div>
+	
+	<c:if test="${ searchPage }">
+		<h1>포스트 검색 결과 페이지</h1>
+	</c:if>
+	<c:if test="${ not searchPage }">
 		<h1>포스트 목록 페이지</h1>
+	</c:if>
+	
+		
 		
 		<nav> <!-- 웹 서버 내에서 이동 메뉴 -->
 			<ul>
@@ -18,6 +26,12 @@
 					<c:url var="mainPage" value="/"></c:url>
 					<a href="${ mainPage }">메인 페이지</a>				
 				</li>
+				<c:if test="${ searchPage }">
+					<li>
+						<c:url var="postList" value="/post"></c:url>
+						<a href="${ postList }">전체 목록 페이지</a>
+					</li>
+				</c:if>
 				<li>
 					<c:url var="postCreatePage" value="/post/create"></c:url>
 					<a href="${ postCreatePage }">포스트 작성</a>
@@ -25,6 +39,21 @@
 			</ul>
 		</nav>
 		<main>
+			<div>
+				<c:url var="postSearchPage" value="/post/search"></c:url>
+				<form method="get" action="${ postSearchPage }">
+					<select name="type">
+						<option value="t">제목</option>
+						<option value="c">내용</option>
+						<option value="tc">제목 + 내용</option>
+						<option value="a">작성자</option>
+					</select>
+					<input type="text" name="keyword" placeholder="검색어" required />
+					<input type="submit" value="검색" />
+				</form>
+			</div>
+		
+		
 			<table>
 				<thead>
 					<tr>

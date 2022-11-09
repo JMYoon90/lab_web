@@ -89,7 +89,16 @@
 	const btnUpdate = document.querySelector('#btnUpdate');
 	
 	btnUpdate.addEventListener('click', function(event){
-		event.preventDefault();
+		event.preventDefault(); // 버튼 기본 기능(submit)을 막음. 
+		
+		// <input> title에 입력된 값
+		const title = document.querySelector('#title').value;
+		// <textarea> content에 입력된 값
+		const content = document.querySelector('#content').value;
+		if (title == '' || content == '') {
+			alert('제목과 내용은 반드시 입력해야 합니다.');
+			return; // 이벤트 리스너 종료
+		}
 		const check = confirm('수정??');
 		if (check) {
 			form.action = '${ postUpdatePage }'
