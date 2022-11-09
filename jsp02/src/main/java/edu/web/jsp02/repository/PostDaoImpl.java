@@ -60,7 +60,8 @@ public class PostDaoImpl implements PostDao {
 		return entity;
 	}
 	
-	public static final String SQL_SELECT = "select * from POSTS order by ID desc";
+	public static final String SQL_SELECT = 
+			"select * from POSTS order by ID desc";
 
 	@Override
 	public List<Post> select() {

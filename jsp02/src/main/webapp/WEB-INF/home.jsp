@@ -21,7 +21,8 @@
 				<a href="${ postList }">포스트 전체 목록</a>
 			</li>
 			<li>
-				<a>회원 목록</a>
+				<c:url var="userList" value="/users"></c:url>
+				<a href="${ userList }">회원 목록</a>
 			</li>
 		</ul>
 	</div>

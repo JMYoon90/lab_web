@@ -25,8 +25,6 @@ public class PostCreateController extends HttpServlet {
 	
 	private PostService postService;
 	
-	private PostServiceImpl postDao = PostServiceImpl.getInstance();
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
