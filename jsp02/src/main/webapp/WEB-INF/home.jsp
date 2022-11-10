@@ -24,6 +24,26 @@
 				<c:url var="userList" value="/users"></c:url>
 				<a href="${ userList }">회원 목록</a>
 			</li>
+			<%-- 로그인 정보가 있는 경우 --%>
+				<%-- EL not empty 연산자: null이 아니고 빈 문자열이 아닌 경우. --%>
+				<c:if test="${ not empty signInUser }">
+					<li>
+						<c:url var="signOutPage" value="/user/signout"></c:url>
+						<a href="${ signOutPage }">로그아웃</a>
+					</li>
+				</c:if>
+				
+				<%-- 로그인 정보가 없는 경우 --%>
+				<c:if test="${ empty signInUser }">
+					<li>
+						<c:url var="signInPgae" value="/user/signin"></c:url>
+						<a href="${ signInPgae }">로그인</a>
+					</li>
+					<li>
+						<c:url var="signUpPage" value="/user/signup"></c:url>
+						<a href="${ signUpPage }">회원가입</a>
+					</li>
+				</c:if>
 		</ul>
 	</div>
 </div>

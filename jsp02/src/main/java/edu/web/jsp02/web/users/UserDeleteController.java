@@ -1,4 +1,4 @@
-package edu.web.jsp02.web.user;
+package edu.web.jsp02.web.users;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
