@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.web.jsp02.domain.user.User;
 import edu.web.jsp02.dto.user.UserCreateDto;
+import edu.web.jsp02.dto.user.UserUpdateDto;
 import edu.web.jsp02.repository.user.UserDao;
 import edu.web.jsp02.repository.user.UserDaoImpl;
 import edu.web.jsp02.service.PostServiceImpl;
@@ -45,5 +46,16 @@ public class UserServiceImpl implements UserService {
 		log.info("read(id = {})", id);
 		return userDao.selectById(id);
 	}
+	
+	@Override
+	public int update(UserUpdateDto dto) {
+		log.info("update(dto={}", dto);
+		return userDao.update(dto.toEntity());
+	}
 
+	@Override
+	public int delete(Integer id) {
+		log.info("delete(id = {})", id);
+		return userDao.delete(id);
+	}
 }

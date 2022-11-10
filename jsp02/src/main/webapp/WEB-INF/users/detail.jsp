@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>JSP 02</title>
 </head>
 <body>
 	<div>
@@ -25,7 +25,7 @@
 					<c:url var="userModifyPage" value="/users/modify">
 						<c:param name="id" value="${ user.id }"></c:param>
 					</c:url>
-					<a href="${ userModifyPage }">포스트 수정</a>
+					<a href="${ userModifyPage }">회원 정보 수정</a>
 				</li>
 			</ul>
 		</nav>

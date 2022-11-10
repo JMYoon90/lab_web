@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.web.jsp02.domain.user.User;
+import edu.web.jsp02.dto.PostUpdateDto;
+import edu.web.jsp02.dto.user.UserUpdateDto;
 import edu.web.jsp02.service.user.UserService;
 import edu.web.jsp02.service.user.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -42,15 +44,29 @@ public class UserModifyController extends HttpServlet {
 		User user = userService.read(id);
 		
 		request.setAttribute("user", user);
-		request.getRequestDispatcher("/WEB-INF/post/modify.jsp")
+		request.getRequestDispatcher("/WEB-INF/users/modify.jsp")
 			.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		log.info("doPost()");
+		
+		Integer id = Integer.valueOf(request.getParameter("id"));
+		String password = request.getParameter("password1");
+		String email = request.getParameter("email");
+		
+		UserUpdateDto dto = UserUpdateDto.builder()
+				.id(id).password(password).email(email)
+				.build();
+		
+		int result = userService.update(dto);
+		
+		response.sendRedirect("/jsp02/users");
+				
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.web.jsp02.domain.user.User;
 import edu.web.jsp02.dto.user.UserCreateDto;
+import edu.web.jsp02.dto.user.UserUpdateDto;
 
 public interface UserService {
 
@@ -12,4 +13,8 @@ public interface UserService {
 	public int create(UserCreateDto dto);
 
 	public User read(Integer id);
+
+	public int update(UserUpdateDto dto);
+
+	public int delete(Integer id);
 }

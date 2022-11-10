@@ -12,4 +12,8 @@ public interface UserDao {
 
 	public User selectById(Integer id);
 
+	public int update(User entity);
+
+	public int delete(Integer id);
+
 }

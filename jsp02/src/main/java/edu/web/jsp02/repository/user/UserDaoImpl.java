@@ -134,5 +134,56 @@ public class UserDaoImpl implements UserDao {
 		
 		return entity;
 	}
+	public static final String SQL_UPDATE = 
+			"update USERS set PASSWORD = ?, EMAIL = ? where ID = ?";
+	
+	@Override
+	public int update(User entity) {
+		int result = 0;
+		
+		try {
+			
+			Connection conn = ds.getConnection();
+			
+			PreparedStatement stmt = conn.prepareStatement(SQL_UPDATE);
+			
+			stmt.setString(1, entity.getPassword());
+			stmt.setString(2, entity.getEmail());
+			stmt.setInt(3, entity.getId());
+			
+			result = stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public static final String SQL_DELETE = 
+			"delete from USERS where ID = ?";
+	@Override
+	public int delete(Integer id) {
+		
+		log.info("delete(id = {})", id);
+		
+		int result = 0; // DB에서 delete SQL 실행 결과값을 저장하기 위한 변수
+		
+		try {
+			@Cleanup
+			Connection conn = ds.getConnection();
+			
+			@Cleanup
+			PreparedStatement stmt = conn.prepareStatement(SQL_DELETE);
+			
+			stmt.setInt(1, id);
+			
+			result = stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 
 }
