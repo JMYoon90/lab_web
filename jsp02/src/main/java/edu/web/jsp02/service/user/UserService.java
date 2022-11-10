@@ -17,4 +17,6 @@ public interface UserService {
 	public int update(UserUpdateDto dto);
 
 	public int delete(Integer id);
+
+	public User singIn(String username, String password);
 }

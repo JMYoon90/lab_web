@@ -57,8 +57,15 @@ public class UserCreateController extends HttpServlet {
 		log.info("dto = {}", dto);
 		
 		int result = userService.create(dto);
-		
 		log.info("create result = {}", result);
+		
+		if (result == 1) { // 회원 가입 성공
+			response.sendRedirect("/jsp02/user/signin"); // 로그인 페이지로 이동
+		} else {
+			response.sendRedirect("/jsp02/user/signup"); // 회원 가입 페이지로 이동
+		}
+		
+		
 		
 		response.sendRedirect("/jsp02/users");
 		

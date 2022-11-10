@@ -7,12 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import com.zaxxer.hikari.HikariDataSource;
 
 import edu.web.jsp02.datasource.HikariDataSourceUtil;
 import edu.web.jsp02.domain.user.User;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
+import oracle.jdbc.proxy.annotation.Pre;
 
 @Slf4j
 public class UserDaoImpl implements UserDao {
@@ -184,6 +187,43 @@ public class UserDaoImpl implements UserDao {
 		}
 		return result;
 	}
+	private static final String SQL_SELECT_BY_USERNAME_AND_PASSWORD = 
+			"select * from USERS where USERNAME = ? and PASSWORD = ?";
 	
+	@Override
+	public User selectByUsernameAndPassword(User user) {
+		log.info("selectByUsernameAndPassword({})", user);
+		
+		User entity = null; // DB에서 select한 결과를 저장할 객체
+		try {
+			@Cleanup
+			Connection conn = ds.getConnection();
+			
+			@Cleanup
+			PreparedStatement stmt = conn.prepareStatement(SQL_SELECT_BY_USERNAME_AND_PASSWORD);
+			log.info(SQL_SELECT_BY_USERNAME_AND_PASSWORD);
+			
+			stmt.setString(1, user.getUsername());
+			stmt.setString(2, user.getPassword());
+			
+			@Cleanup
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) { // select 결과가 있으면
+				Integer id = rs.getInt("ID");
+				String username = rs.getString("USERNAME");
+				String password = rs.getString("PASSWORD");
+				String email = rs.getString("EMAIL");
+				int points = rs.getInt("POINTS");
+				
+				entity = User.builder()
+						.id(id).username(username).password(password)
+						.email(email).points(points)
+						.build();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return entity;
+	}
 
 }

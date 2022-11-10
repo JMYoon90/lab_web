@@ -58,4 +58,15 @@ public class UserServiceImpl implements UserService {
 		log.info("delete(id = {})", id);
 		return userDao.delete(id);
 	}
+	
+	@Override
+	public User singIn(String username, String password) {
+		log.info("signIn(username= {}, password={})", username, password);
+		
+		User user = User.builder()
+				.username(username).password(password)
+				.build();
+				
+		return userDao.selectByUsernameAndPassword(user);
+	}
 }

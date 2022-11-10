@@ -16,4 +16,6 @@ public interface UserDao {
 
 	public int delete(Integer id);
 
+	public User selectByUsernameAndPassword(User user);
+
 }
