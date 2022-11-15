@@ -44,7 +44,7 @@ public class PostController {
 		PostCreateDto dto = PostCreateDto.builder()
 				.title(title).content(content).author(author)
 				.build();
-		postService.insert(dto);
+		postService.insert(dto.toEntity());
 		return "redirect:/post/list";
 	}
 	
@@ -70,7 +70,7 @@ public class PostController {
 		PostUpdateDto dto = PostUpdateDto.builder()
 				.id(id).title(title).content(content)
 				.build();
-		postService.updateById(dto);
+		postService.updateById(dto.toEntity());
 		return "redirect:/post/list";
 	}
 	

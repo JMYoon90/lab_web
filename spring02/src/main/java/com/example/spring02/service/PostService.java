@@ -33,16 +33,16 @@ public class PostService {
 		return postMapper.selectOrderByIdDesc();
 	}
 	
-	public int insert(PostCreateDto dto) {
-		return postMapper.insert(dto);
+	public int insert(Post post) {
+		return postMapper.insert(post);
 	}
 	
 	public Post selectById(Integer id) {
 		return postMapper.selectById(id);
 	}
 
-	public int updateById(PostUpdateDto dto) {
-		return postMapper.updateById(dto);
+	public int updateById(Post post) {
+		return postMapper.updateById(post);
 	}
 	
 	public int delete(Integer id) {

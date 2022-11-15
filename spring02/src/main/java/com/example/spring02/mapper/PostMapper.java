@@ -15,7 +15,7 @@ public interface PostMapper {
 	
 	List<Post> selectOrderByIdDesc();
 	Post selectById(Integer id);
-	int insert(PostCreateDto dto);
-	int updateById(PostUpdateDto dto);
+	int insert(Post post);
+	int updateById(Post post);
 	int deleteById(int id);
 }
