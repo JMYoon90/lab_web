@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -45,6 +46,15 @@ public class TestHikariConfig {
 	
 	@Autowired
 	private HikariDataSource ds;
+	
+	@Autowired
+	private SqlSessionFactoryBean sessionFactory;
+	
+	@Test
+	public void testSessionFactory() {
+		Assertions.assertNotNull(sessionFactory);
+		log.info("SqlSessionFactoryBean = {}", sessionFactory);
+	}
 	
 	@Test
 	public void testHikariConfig() throws SQLException {
