@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.spring02.domain.Post;
 import com.example.spring02.dto.PostCreateDto;
@@ -17,21 +18,27 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
+@RequestMapping("/post/")
+//-> 클래스에 @RequestMapping 에너테이션을 사용하면,
+//   클래스의 모든 메서드들의 매핑 주소는 @RequestMapping에서 설정된 URL로 시작함. 
 @Controller // 스프링 컨테이너가 Bean으로 생성, 관리
 public class PostController {
 	
 	private final PostService postService; // 생성자에 의한 의존성 주입
 	
-	@GetMapping("/post/list")
+	@GetMapping("/list")
 	public String list(Model model) {
 		log.info("list()");
-		List<Post> list = postService.read();
-		model.addAttribute("posts", list);
 		
-		return "/post/list";
+		// Service 계층의 메서드를 사용해서 포스트 전체 목록을 검색함.
+		List<Post> list = postService.read();
+		// 포스트 목록을 뷰에 전달하기 위해서 model을 이용.
+		model.addAttribute("list", list);
+		
+		return "/post/list"; // /WEB-INF/views/post/list.jsp
 	}
 	
-	@GetMapping("/post/create")
+	@GetMapping("/create")
 	public String create() {
 		log.info("create()");
 		
@@ -39,32 +46,34 @@ public class PostController {
 	}
 	
 	@PostMapping("/postCreate")
-	public String postCreate(String title, String content, String author) {
-		log.info("create(title={},content={},author={}", title, content, author);
-		PostCreateDto dto = PostCreateDto.builder()
-				.title(title).content(content).author(author)
-				.build();
-		postService.insert(dto.toEntity());
+	public String postCreate(PostCreateDto dto) {
+		log.info("create(dto={}", dto);
+		// 서비스 계층이 메서드를 호출해서 포스트 작성 내용을 DB에 저장
+		postService.insert(dto);
+		// 포스트 목록 페이지로 이동(redirect): PRG(Post - Redirect - Get)
 		return "redirect:/post/list";
 	}
 	
-	@GetMapping("/post/detail")
-	public String detail(int id, Model model) {
+	@GetMapping("/detail")
+	public String detail(Integer id, Model model) {
+		log.info("detail={}", id);
 		Post post = postService.selectById(id);
 		model.addAttribute("post", post);
-		log.info("detail()");
+		
 		return "/post/detail";
 	}
 	
-	@GetMapping("/post/modify")
-	public String modify(int id, Model model) {
+	@GetMapping("/modify")
+	public String modify(Integer id, Model model) {
+		log.info("modify(id={})", id);
+		
 		Post post = postService.selectById(id);
 		model.addAttribute("post", post);
-		log.info("detail()");
+		
 		return "/post/modify";
 	}
 	
-	@PostMapping("/postUpdate")
+	@PostMapping("/update")
 	public String postUpdate(Integer id, String title, String content) {
 		log.info("update(id={},title={},content={})", id, title, content);
 		PostUpdateDto dto = PostUpdateDto.builder()
@@ -74,9 +83,9 @@ public class PostController {
 		return "redirect:/post/list";
 	}
 	
-	@PostMapping("/postDelete")
+	@PostMapping("/delete")
 	public String postDelete(Integer id) {
-		log.info("delete(id=}{)", id);
+		log.info("delete(id={})", id);
 		postService.delete(id);
 		return "redirect:/post/list";
 	}

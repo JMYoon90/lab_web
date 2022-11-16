@@ -18,18 +18,16 @@
 	
 		<header class="my-2 p-4 text-center text-bg-secondary">
 			<h1>Spring MVC &amp; MyBatis</h1>
-			<h2>포스트 작성 페이지</h2>
+			<h2>메인 페이지</h2>
 		</header>
 		
 		<nav>
 			<ul class="nav bg-light">
 				<li class="nav-item">
-					<c:url var="mainPage" value="/" />
-					<a class="nav-link active" href="${ mainPage }">메인 페이지</a>
+					<a class="nav-link active" href="#">LINK 1</a>
 				</li>
 				<li class="nav-item">
-					<c:url var="postListPage" value="/post/list" />
-					<a class="nav-link active" href="${ postListPage }">목록 페이지</a>
+					<a class="nav-link disabled" href="#">LINK 2</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link disabled" href="#">LINK 3</a>
@@ -37,32 +35,17 @@
 			</ul>
 		</nav>
 		
-		<main>
-			<div class="card my-4">
-				<form class="m-4" action="postCreate" method="post">
-					<div class="my-4">
-						<label for="title" class="form=label mb-2">제목</label>
-						<input id="title"  class="form-control"
-							type="text" name="title" required autofocus />			
-					</div>
-					<div class="my-4">
-						<label for="content" class="form-label mb-2">내용</label>
-						<textarea id="content" class="form-control" 
-							name="content" rows="5" cols="80" required></textarea>
-					</div>
-					<div class="my-4">
-						<label for="author" class="form=label mb-2">작성자</label>
-						<input id="author" class="form-control"
-							type="text" name="author" required />			
-					</div>
-					<div class="my-4">
-						<input class="form-control btn btn-success" type="submit" value="작성 완료" />
-					</div>
-				</form>
-			</div>
+		<main> <!-- TODO: main content -->
+		
 		</main>
 	</div>
 
+	<ul>
+		<li>
+			<c:url var="postlist" value="/post/list"></c:url>
+			<a href="${ postlist }">포스트 목록</a>
+		</li>
+	</ul>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

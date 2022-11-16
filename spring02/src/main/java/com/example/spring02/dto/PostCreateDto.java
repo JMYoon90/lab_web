@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// 포스트 작성 페이지에서 보낸 요청 파라미터들을 저장하고 서비스 계층으로 전달하기 위한 목적.
 // VO(Value Object): 값(데이터) 저장하는 객체. DB의 테이블과 같은 구조로 설계. (예) Post
 // DTO(Data Transfer Object): 계층들 사이에서 값(데이터)를 전달할 때 사용하는 객체.
 //   controller(web) 계층과 service 계층 사이에서 메서드를 호출할 때

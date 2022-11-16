@@ -30,14 +30,17 @@ public class PostService {
 	private final PostMapper postMapper; // (2)
 	
 	public List<Post> read() {
+		log.info("read()");
 		return postMapper.selectOrderByIdDesc();
 	}
 	
-	public int insert(Post post) {
-		return postMapper.insert(post);
+	public int insert(PostCreateDto dto) {
+		log.info("insert(dto={})", dto);
+		return postMapper.insert(dto.toEntity());
 	}
 	
 	public Post selectById(Integer id) {
+		log.info("read(id={})", id);
 		return postMapper.selectById(id);
 	}
 

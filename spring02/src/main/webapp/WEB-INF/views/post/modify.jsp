@@ -5,117 +5,120 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>JSP 2</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Spring 2</title>
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+		crossorigin="anonymous">
 </head>
 <body>
-	<div>
-		<h1>포스트 수정 페이지</h1>
+	<div class="container-fluid">
+	
+		<header class="my-2 p-4 text-center text-bg-secondary">
+			<h1>Spring MVC &amp; MyBatis</h1>
+			<h2>포스트 수정 페이지</h2>
+		</header>
 		
 		<nav>
-			<ul>
-				<c:if test="${ not empty signInUser }">
-					<li>
-						<span>${ signInUser }</span>
-						<c:url var="signOutPage" value="/user/signout"></c:url>
-						<a href="${ signOutPage }">로그아웃</a>
-					</li>
-				</c:if>
-				<li>
-					<c:url var="mainPage" value="/"></c:url>
-					<a href="${ mainPage }">메인 페이지</a>
+			<ul class="nav bg-light">
+				<li class="nav-item">
+					<c:url var="mainPage" value="/" />
+					<a class="nav-link active" href="${ mainPage }">메인 페이지</a>
 				</li>
-				<li>
-					<c:url var="postListPage" value="/post"></c:url>
-					<a href="${ postListPage }">포스트 목록</a>
+				<li class="nav-item">
+					<c:url var="postListPage" value="/post/list" />
+					<a class="nav-link active" href="${ postListPage }">목록 페이지</a>
 				</li>
-				<li>
-					<c:url var="postModifyPage" value="/post/detail">
+				<li class="nav-item">
+					<c:url var="postModifyPage" value="/post/modify">
 						<c:param name="id" value="${ post.id }"></c:param>
 					</c:url>
-					<a href=" ${ postModifyPage }">포스트 상세보기</a>
+					<a class="nav-link disabled" href="${ postModifyPage }">수정 페이지</a>
 				</li>
 			</ul>
 		</nav>
 		
-		<Main>
-			<form id="postForm">
-			 <!-- action: 제출(submit) 주소. 기본값은 현재 페이지 주소
-			 method: 제출(submit) 방식. 기본값은 'get' -->
-				<div>
-					<label for="id">번호</label>
-					<input id="id" type="text" name="id" value="${ post.id }" readonly />
+		<main class="my-4">
+			<div class="card">
+				<div class="card-header"></div>
+				<div class="card-body">
+					<form id="formModify">
+						<div class="my-2">
+							<label for="id" class="form-label">번호</label>
+							<input id="id" class="form-control"
+								type="text" name="id" value="${ post.id }" readonly />
+						</div>
+						<div class="my-2">
+							<label for="title" class="form-label">제목</label>
+							<input id="title"  class="form-control"
+								type="text" name="title" value="${ post.title }" required autofocus />
+						</div>
+						<div class="my-2">
+							<label for="content" class="form-label">내용</label>
+							<textarea id="content" name="content" class="form-control" required>${ post.content }</textarea>
+						</div>
+						<div class="my-2">
+							<label for="author" class="form-label">작성자</label>
+							<input id="author"  class="form-control"
+								type="text" value="${ post.author }" readonly />
+						</div>
+						<div class="my-2">
+							<label for="createdTime" class="form-label">작성시간</label>
+							<input id="createdTime"  class="form-control"
+								type="text" value="${ post.created_time }" readonly />
+						</div>
+						<div class="my-2">
+							<label for="modifiedTime" class="form-label">수정시간</label>
+							<input id="modifiedTime"  class="form-control"
+								type="text" value="${ post.modified_time }" readonly />
+						</div>
+						<div class="my-2">
+							<button id="btnDelete" class="btn btn-danger">삭제</button>
+							<button id="btnUpdate" class="btn btn-success">업데이트</button>
+						</div>
+					</form>
 				</div>
-				<div>
-				<label for="title">제목</label>
-					<input id="title" type="text" name="title" value="${ post.title }" required autofocus />
-				</div>
-				<div>
-					<label for="content">내용</label>
-					<textarea id="content" rows="5" cols="80" name="content" required>${ post.content }</textarea>
-				</div>
-				<div style="display: none;">
-					<label for="author">작성자</label>
-					<input id="author" type="hidden" value="${ post.author }" readonly />
-				</div>
-				<%-- <c:if test="${ signInUser == post.author }"> --%>
-					<div>
-						<button id="btnDelete">삭제</button>
-						<button id="btnUpdate">수정완료</button>
-						<!-- form 안에서 작성된 버튼들은 form의 action 주소로 method 방식의 요청을 보냄 -->
-					</div>
-				<%-- </c:if> --%>
-			</form>
-		</Main>
+			</div>
+		
+		</main>
 	</div>
-	
-	<c:url var="postDeletePage" value="/postDelete"></c:url>
-	<c:url var="postUpdatePage" value="/postUpdate"></c:url>
-	
-	<script>
-	// id="postForm" 인 HTML 요소를 찾음.
-	const form = document.querySelector('#postForm');
-	
-	// id="btnDelete" 인 버튼을 찾음.
-	const btnDelete = document.querySelector('#btnDelete');
-	
-	// 버튼 클릭 이벤트 리스너를 등록.
-	btnDelete.addEventListener('click', function(event) {
-		event.preventDefault(); 
-		// 이벤트 기본 처리방식을 막음(실행되지 않도록 함).
-		//-> 폼 양식이 서버로 제출(submit)되지 않도록 함.
-		
-		// 사용자에게 삭제 확인
-		const check = confirm('삭제??');
-		if (check) { // 사용자가 "확인"을 선택했을 때
-			
-			form.action = '${ postDeletePage }'; // 제출 요청 주소
-			form.method = 'post'; // 제출 요청 방식
-			form.submit(); // 서버로 제출(데이터 전송)
-		}
-	});
-	
-	
-	const btnUpdate = document.querySelector('#btnUpdate');
-	
-	btnUpdate.addEventListener('click', function(event){
-		event.preventDefault(); // 버튼 기본 기능(submit)을 막음. 
-		
-		// <input> title에 입력된 값
-		const title = document.querySelector('#title').value;
-		// <textarea> content에 입력된 값
-		const content = document.querySelector('#content').value;
-		if (title == '' || content == '') {
-			alert('제목과 내용은 반드시 입력해야 합니다.');
-			return; // 이벤트 리스너 종료
-		}
-		const check = confirm('수정??');
-		if (check) {
-			form.action = '${ postUpdatePage }'
-			form.method = 'post';
-			form.submit();
-		}
-	});
-	</script>
 
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
+
+	<c:url var="postDeletePage" value="/post/delete" />
+	<c:url var="postUpdatePage" value="/post/update" />
+	<script>
+	// HTML 문서 로딩이 모두 끝난 이후에 function을 실행.
+		const form = document.querySelector('#formModify')
+		
+		const btnDelete = document.querySelector('#btnDelete');
+	
+		btnDelete.addEventListener('click', function (event) {
+			event.preventDefault(); // 버튼의 이벤트 처리 기본 동작(폼 제출)을 막음.
+			const result = confirm("삭제하시겠습니까?");
+			if (result) {
+				form.action = '${ postDeletePage }'; // EL
+				form.method = 'post';
+				form.submit(); // 폼 제출
+			}
+		}); 
+	
+		const form = document.querySelector('#formModify')
+		const btnUpdate = document.querySelector('#btnUpdate');
+		btnDelete.addEventListener('click', function (event) {
+			event.preventDefault();
+			const result = confirm("수정하시겠습니까?");
+			if(result){
+				form.action = '${ postUpdatePage }';
+				form.method = 'post';
+				form.submit();
+			}
+		})
+	</script>
 </body>
 </html>
