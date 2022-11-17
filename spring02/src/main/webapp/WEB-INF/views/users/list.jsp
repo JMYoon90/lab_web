@@ -18,18 +18,18 @@
 	
 		<header class="my-2 p-4 text-center text-bg-secondary">
 			<h1>Spring MVC &amp; MyBatis</h1>
-			<h2>포스트 목록 페이지</h2>
+			<h2>회원 목록 페이지</h2>
 		</header>
 		
 		<nav>
 			<ul class="nav bg-light">
 				<li class="nav-item">
-					<c:url var="mainPage" value="/" />
-					<a class="nav-link active" href="${ mainPage }">메인 페이지</a>
+					<c:url var="mainpage" value="/" />
+					<a class="nav-link active" href="${ mainpage }">메인 페이지</a>
 				</li>
 				<li class="nav-item">
-					<c:url var="postCreatePage" value="/post/create" />
-					<a class="nav-link active" href="${ postCreatePage }">새 글 작성</a>
+					<c:url var="createUser" value="/users/create" />
+					<a class="nav-link active" href="${ createUser }">회원가입</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link disabled" href="#">LINK 3</a>
@@ -37,53 +37,28 @@
 			</ul>
 		</nav>
 		
-		<main class="m-2">
-		
-			<div class="bg-light my-2 p-2">
-				<c:url var="postSearchPage" value="/post/search" />
-				<form action="${ postSearchPage }">
-					<div class="row">
-						<div class="col-5">
-							<select class="form-control" name="type">
-								<option value="t">제목</option>
-								<option value="c">내용</option>
-								<option value="tc">제목+ 내용</option>
-								<option value="a">작성자</option>
-							</select>
-						</div>
-						<div class="col-5">
-							<input class="form-control" type="text" name="keyword" placeholder="검색어" required autofocus/>
-						</div>
-						<div class="col-2">
-							<input class="form-control btn btn-outline-success" type="submit" value="검색" />
-						</div>
-					</div>
-				</form>
-			</div>
-			
+		<main>
 			<div class="card my-2">
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
 							<th>번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>수정시간</th>
+							<th>사용자아이디</th>
+							<th>이메일주소</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="post" items="${ list }">
+						<c:forEach var="user" items="${ userlist }" >
 							<tr>
-								<td>${ post.id }</td>
-								
+								<td>${ user.id }</td>
 								<td>
-								<c:url var="postDetail" value="/post/detail" >
-									<c:param name="id" value="${ post.id }" />
+								<c:url var="userDetail" value="/users/detail">
+									<c:param name="id" value="${ user.id }"></c:param>
 								</c:url>
-								<a href="${ postDetail }">${ post.title }</a>
+								<a href="${ userDetail }">${ user.username }</a>
 								</td>
-								<td>${ post.author }</td>
-								<td>${ post.modified_time }</td>
+								
+								<td>${ user.email }</td>
 							</tr>
 						</c:forEach>
 					</tbody>

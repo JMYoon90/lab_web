@@ -18,36 +18,51 @@
 	
 		<header class="my-2 p-4 text-center text-bg-secondary">
 			<h1>Spring MVC &amp; MyBatis</h1>
-			<h2>메인 페이지</h2>
+			<h2>회원 가입 페이지</h2>
 		</header>
 		
 		<nav>
 			<ul class="nav bg-light">
 				<li class="nav-item">
-					<c:url var="postlistpage" value="/post/list"></c:url>
-					<a class="nav-link active" href="${ postlistpage }">목록 페이지</a>
-				</li>
-				<c:if test="${ empty signin }">
-				<li class="nav-item">
-					<c:url var="userlistpage" value="/users/list"></c:url>
-					<a class="nav-link active" href="${ userlistpage }">회원 목록 페이지</a>
+					<c:url var="mainPage" value="/" />
+					<a class="nav-link active" href="${ mainPage }">메인 페이지</a>
 				</li>
 				<li class="nav-item">
-					<c:url var="usersignin" value="/users/signin"></c:url>
-					<a class="nav-link active" href="${ usersignin }">로그인</a>
+					<c:url var="postListPage" value="/users/list" />
+					<a class="nav-link active" href="${ postListPage }">목록 페이지</a>
 				</li>
-				</c:if>
-				<c:if test="${ not empty signin }">
 				<li class="nav-item">
-					로그아웃
+					<a class="nav-link disabled" href="#">LINK 3</a>
 				</li>
-				</c:if>
 			</ul>
 		</nav>
 		
-		<main> 
+		<main>
+			<div class="card my-4">
+				<form class="m-4" action="userCreate" method="post">
+					<div class="my-4">
+						<label for="username" class="form=label mb-2">사용자아이디</label>
+						<input id="username"  class="form-control"
+							type="text" name="username" required autofocus />			
+					</div>
+					<div class="my-4">
+						<label for="password" class="form-label mb-2">비밀번호</label>
+						<input id="password" class="form-control"
+							type="password" name="password" required />
+					</div>
+					<div class="my-4">
+						<label for="email" class="form=label mb-2">이메일</label>
+						<input id="email" class="form-control"
+							type="email" name="email" required />			
+					</div>
+					<div class="my-4">
+						<input class="form-control btn btn-success" type="submit" value="회원가입" />
+					</div>
+				</form>
+			</div>
 		</main>
 	</div>
+
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

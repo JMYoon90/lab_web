@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.spring02.domain.Post;
 import com.example.spring02.dto.PostCreateDto;
+import com.example.spring02.dto.PostSearchDto;
 import com.example.spring02.dto.PostUpdateDto;
 import com.example.spring02.service.PostService;
 
@@ -74,13 +75,11 @@ public class PostController {
 	}
 	
 	@PostMapping("/update")
-	public String postUpdate(Integer id, String title, String content) {
-		log.info("update(id={},title={},content={})", id, title, content);
-		PostUpdateDto dto = PostUpdateDto.builder()
-				.id(id).title(title).content(content)
-				.build();
-		postService.updateById(dto.toEntity());
-		return "redirect:/post/list";
+	public String postUpdate(PostUpdateDto dto) {
+		log.info("update(dto={})", dto);
+		
+		postService.updateById(dto);
+		return "redirect:/post/detail?id=" + dto.getId();
 	}
 	
 	@PostMapping("/delete")
@@ -89,6 +88,17 @@ public class PostController {
 		postService.delete(id);
 		return "redirect:/post/list";
 	}
+	
+	@GetMapping("/search")
+	public String postSearch(PostSearchDto dto, Model model) {
+		log.info("search(dto={})", dto);
+		
+		List<Post> result = postService.searchByKeyword(dto);
+		model.addAttribute("list", result);
+		
+		return "/post/list";
+	}
+	
 	
 
 }
