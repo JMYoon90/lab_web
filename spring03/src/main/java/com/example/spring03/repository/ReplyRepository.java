@@ -10,12 +10,12 @@ import com.example.spring03.domain.Reply;
 
 public interface ReplyRepository extends JpaRepository<Reply, Integer> {
 
-	// 해당 포스트 번호에 달려 있는 모든 댓글 리스트를 아이디 내림차순으로 검색.
-	// select * from REPLIES where POST_ID = ? order by ID desc
-	List<Reply> findByPostIdOrderByIdDesc(Integer postId);
-	
-	
-	// JPQL
-	@Query("select r from REPLIES r where r.post.id = :postId order by r.id desc")
-	List<Reply> SelectAllReplies(@Param(value = "postId") Integer postId);
+    // 해당 포스트 번호에 달려 있는 모든 댓글 리스트를 아이디 내림차순으로 검색
+    // select * from REPLIES where POST_ID = ? order by ID desc
+    List<Reply> findByPostIdOrderByIdDesc(Integer postId);
+    
+    // JPQL
+    @Query("select r from REPLIES r where r.post.id = :postId order by r.id desc")
+    List<Reply> selectAllReplies(@Param(value = "postId") Integer postId);
+    
 }

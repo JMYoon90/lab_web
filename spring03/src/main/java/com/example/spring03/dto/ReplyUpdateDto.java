@@ -6,15 +6,12 @@ import lombok.Data;
 
 @Data
 public class ReplyUpdateDto {
-	
-	private Integer replyId;
-	private String replyText; // getReplyText(), setRepltText()
-	
-	public Reply toEntity() {
-		return Reply.builder()
-				.id(replyId).replyText(replyText)
-				.build();
-	}
-	
+    private Integer replyId;
+    private String replyText;
 
+    public Reply toEntity() {
+        return Reply.builder()
+                .id(replyId).replyText(replyText)
+                .build();
+    }
 }

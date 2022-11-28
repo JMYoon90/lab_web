@@ -6,15 +6,15 @@ import lombok.Data;
 
 @Data
 public class PostUpdateDto {
-	// 필드 이름은 요청 파라미터와 같게.
-	private Integer id;
-	private String title;
-	private String content;
-	
-	// DTO를 Entity 객체로 변환/리턴 -> PostService에서 PostRepository 메서드를 호출할 때 사용.
-	public Post toEntity() {
-		return Post.builder()
-				.id(id).title(title).content(content)
-				.build();
-	}
+    // 필드 이름은 요청 파라미터와 같게.
+    private Integer id;
+    private String title;
+    private String content;
+
+    // DTO를 Entity 객체로 변환/리턴 -> PostService에서 PostRepository 메서드를 호출할 때.
+    public Post toEntity() {
+        return Post.builder()
+                .id(id).title(title).content(content)
+                .build();
+    }
 }

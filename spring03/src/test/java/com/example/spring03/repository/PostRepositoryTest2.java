@@ -23,7 +23,7 @@ public class PostRepositoryTest2 {
 		log.info("수정전: {} | {} | {}", entity, entity.getCreatedTime(), entity.getModifiedTime());
 		
 		// (2) 엔터티를 수정
-		entity.Update("update 테스트", "Spring Data JPA를 사용한 DB 테이블 업데이트");
+		entity.update("update 테스트", "Spring Data JPA를 사용한 DB 테이블 업데이트");
 		log.info("수정 후: {} | {} | {}", entity, entity.getCreatedTime(), entity.getModifiedTime());
 		
 		// (3) 수정한 엔터티를 postRepository.save(entity) 메서드 호출
