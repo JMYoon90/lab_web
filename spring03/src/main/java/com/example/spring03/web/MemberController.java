@@ -45,7 +45,7 @@ public class MemberController {
 		
 		memberService.registerMember(dto);
 		
-		return "redirect:/"; // 회원가입 성공 후 이동(redirect)
+		return "redirect:/login"; // 회원가입 성공 후 이동(redirect)
 	}
 	
 	
