@@ -23,7 +23,7 @@ public class PostRepositoryTests {
     @Autowired // 의존성 주입
     private PostRepository postRepository;
     
-    @Test
+//    @Test
     @Order(1)
     public void testSave() {
         // JpaRepository의 save() 메서드:
