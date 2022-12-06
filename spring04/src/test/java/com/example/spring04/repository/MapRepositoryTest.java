@@ -23,7 +23,7 @@ public class MapRepositoryTest {
 		Assertions.assertNotNull(mapRepository);
 		log.info("mapRepository = {}", mapRepository);
 		
-		List<Map> list = mapRepository.findByOrderByIdDesc();
+		List<Map> list = mapRepository.findAll();
 		Assertions.assertTrue(list.size() > 0);
 		for (Map m : list) {
 			log.info("{} | {} | {}", m.getAddress(), m.getTitle(), m.getContent());

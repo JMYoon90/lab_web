@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.spring04.Dto.CoordSaveDto;
 import com.example.spring04.domain.Map;
 import com.example.spring04.repository.MapRepository;
 
@@ -20,9 +21,16 @@ public class MapService {
 	public List<Map> read() {
 		log.info("read()");
 		List<Map> list = mapRepository.findAll();
-		log.info("service=" + list.size());
 		log.info("service=" + list);
 		return list;
+	}
+	
+	public Map saveCoord(CoordSaveDto dto) {
+		log.info("SaveCoord(dto={})", dto);
+		
+		Map entity = mapRepository.save(dto.toEntity());
+
+		return entity;
 	}
 	
 }

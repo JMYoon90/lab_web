@@ -17,7 +17,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity(name = "KAKAOMAP")
-@SequenceGenerator(name = "MAP_SEQ_GEN", sequenceName = "KAKAOMAP_SEQ" , initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "MAP_SEQ_GEN", sequenceName = "KAKAOMAP_SEQ1" , initialValue = 1, allocationSize = 1)
 public class Map {
 
 	@Id
